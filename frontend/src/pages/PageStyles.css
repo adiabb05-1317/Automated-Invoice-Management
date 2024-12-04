@@ -1,0 +1,65 @@
+.page-container {
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 400px; /* Set a max height to allow vertical scrolling if needed */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+thead {
+  background-color: #4caf50;
+  color: white;
+}
+
+th,
+td {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #e8f5e9;
+}
+
+td {
+  color: #555;
+}
+
+th {
+  font-weight: bold;
+}
+
+.missing-field {
+  color: red;
+  font-style: italic;
+}
+
+.missing-field-row {
+  background-color: #ffe5e5;
+}/*# sourceMappingURL=PageStyles.css.map */
