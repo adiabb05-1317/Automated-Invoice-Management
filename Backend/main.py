@@ -14,7 +14,7 @@ from utils import extract_text_from_csv, extract_text_from_pdf, extract_text_fro
 # Configure Flask and Gemini API
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = '/tmp'
-CORS(app, resources={r"/*": {"origins": "https://sparkly-biscochitos-b47e46.netlify.app"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 genai.configure(api_key='AIzaSyDWVGsgZDRLGhg-hEG031TAeuIzS0UQQE8')
 
 
@@ -81,6 +81,7 @@ def upload_files():
             - Re-check the response before sending.
             - Return an empty array `[]` if no valid data is found.
             - Dont return duplicate data which has same product name and only return if it has same customer name and etc.
+            - Please get all details and all products and dont repeate anything be careful with the data.
         """
 
         
