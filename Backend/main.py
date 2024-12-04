@@ -14,7 +14,7 @@ from utils import extract_text_from_csv, extract_text_from_pdf, extract_text_fro
 # Configure Flask and Gemini API
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = '/tmp'
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "https://sparkly-biscochitos-b47e46.netlify.app"}})
 genai.configure(api_key='AIzaSyDWVGsgZDRLGhg-hEG031TAeuIzS0UQQE8')
 
 
