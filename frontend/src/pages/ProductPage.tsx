@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { useAppSelector } from '../store/hooks';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { updateData } from '../features/invoiceSlice';
 import './PageStyles.css';
 import { toast } from 'react-toastify';
 
 const ProductPage: React.FC = () => {
   const products = useAppSelector((state) => state.invoices.data);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const invalidProducts = products.filter(
@@ -20,6 +22,19 @@ const ProductPage: React.FC = () => {
       toast.warn(`${invalidProducts.length} product(s) have missing fields.`);
     }
   }, [products]);
+
+  const handleChange = (
+    id: string | undefined,
+    field: string,
+    value: string | number | null
+  ) => {
+    dispatch(
+      updateData({
+        id,
+        [field]: value,
+      })
+    );
+  };
 
   return (
     <div className="page-container">
@@ -50,12 +65,52 @@ const ProductPage: React.FC = () => {
                     : ''
                 }
               >
-                <td>{product.productName || <span className="missing-field">Missing</span>}</td>
-                <td>{product.quantity || <span className="missing-field">Missing</span>}</td>
-                <td>{product.unitPrice || <span className="missing-field">Missing</span>}</td>
-                <td>{product.tax || <span className="missing-field">Missing</span>}</td>
-                <td>{product.priceWithTax || <span className="missing-field">Missing</span>}</td>
-                <td>{product.discount ?? 'N/A'}</td>
+                <td>
+                  <input
+                    type="text"
+                    value={product.productName || ''}
+                    onChange={(e) =>
+                      handleChange(product.id, 'productName', e.target.value)
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value={product.quantity || ''}
+                    onChange={(e) =>
+                      handleChange(product.id, 'quantity', Number(e.target.value))
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value={product.unitPrice || ''}
+                    onChange={(e) =>
+                      handleChange(product.id, 'unitPrice', Number(e.target.value))
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value={product.tax || ''}
+                    onChange={(e) =>
+                      handleChange(product.id, 'tax', Number(e.target.value))
+                    }
+                  />
+                </td>
+                <td>{product.priceWithTax || 'Missing'}</td>
+                <td>
+                  <input
+                    type="number"
+                    value={product.discount ?? ''}
+                    onChange={(e) =>
+                      handleChange(product.id, 'discount', Number(e.target.value))
+                    }
+                  />
+                </td>
               </tr>
             ))}
           </tbody>

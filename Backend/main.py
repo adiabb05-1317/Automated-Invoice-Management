@@ -80,6 +80,7 @@ def upload_files():
             - Ensure accuracy in quantity, unit price, tax, and total amount calculations.
             - Re-check the response before sending.
             - Return an empty array `[]` if no valid data is found.
+            - Dont return duplicate data which has same product name and only return if it has same customer name and etc.
         """
 
         

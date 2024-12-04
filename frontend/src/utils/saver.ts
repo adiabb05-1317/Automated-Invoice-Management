@@ -9,7 +9,7 @@ export const uploadFilesToServer = async (files: File[], dispatch: AppDispatch) 
   files.forEach((file) => formData.append('files[]', file));
 
   try {
-    const response = await axios.post('http://localhost:8000/invoice/upload', formData, {
+    const response = await axios.post('https://automated-invoice-management-1.onrender.com/invoice/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { useAppSelector } from '../store/hooks';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { updateData } from '../features/invoiceSlice';
 import './PageStyles.css';
 import { toast } from 'react-toastify';
 
 const CustomerPage: React.FC = () => {
   const customers = useAppSelector((state) => state.invoices.data);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const invalidCustomers = customers.filter(
@@ -15,6 +17,19 @@ const CustomerPage: React.FC = () => {
       toast.warn(`${invalidCustomers.length} customer(s) have missing fields.`);
     }
   }, [customers]);
+
+  const handleChange = (
+    id: string | undefined,
+    field: string,
+    value: string | number | null
+  ) => {
+    dispatch(
+      updateData({
+        id,
+        [field]: value,
+      })
+    );
+  };
 
   return (
     <div className="page-container">
@@ -38,9 +53,33 @@ const CustomerPage: React.FC = () => {
                     : ''
                 }
               >
-                <td>{customer.customerName || <span className="missing-field">Missing</span>}</td>
-                <td>{customer.phone || <span className="missing-field">Missing</span>}</td>
-                <td>{customer.totalPurchases || <span className="missing-field">Missing</span>}</td>
+                <td>
+                  <input
+                    type="text"
+                    value={customer.customerName || ''}
+                    onChange={(e) =>
+                      handleChange(customer.id, 'customerName', e.target.value)
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={customer.phone || ''}
+                    onChange={(e) =>
+                      handleChange(customer.id, 'phone', e.target.value)
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value={customer.totalPurchases || ''}
+                    onChange={(e) =>
+                      handleChange(customer.id, 'totalPurchases', Number(e.target.value))
+                    }
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
