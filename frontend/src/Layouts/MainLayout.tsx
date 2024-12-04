@@ -60,7 +60,7 @@ const MainLayout: React.FC = () => {
 
     setLoading(true);
     try {
-      const response = await uploadFilesToServer(files, dispatch);
+         await uploadFilesToServer(files, dispatch);
       toast.success('Invoice summary generated successfully!');
     } catch (error) {
       console.error('Error uploading files:', error);
